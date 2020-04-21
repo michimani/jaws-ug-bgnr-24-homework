@@ -24,7 +24,7 @@ JAWS-UG 初心者支部#24 サーバレスハンズオン勉強会 にて宿題�
 
 ## 構築されるアーキテクチャ
 
-![Architecture created by this CDK project.](./docs/images/JAWS-UG-Beginner-#24-Homework.jpg)
+![Architecture created by this CDK project.](./docs/images/JAWS-UG-Beginner-24-Homework.jpg)
 
 ## アーキテクチャの詳細
 
