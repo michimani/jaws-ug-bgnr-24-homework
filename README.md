@@ -102,7 +102,11 @@ JAWS-UG 初心者支部#24 サーバレスハンズオン勉強会 にて宿題�
 # パイプラインの実行
 
 `sample/HelloEnglish-Joanna.mp3` を `transcribe-input-****` バケットにアップロードします。  
-しばらくすると `translate-output-****` バケットに翻訳結果が `yyyymmddhhmmss_Translate.txt` というキー名で出力されます。Slack の Incoming WebHook URL を指定している場合は、対象となっているチャンネルにも翻訳結果の文章が通知されます。
+しばらくすると `translate-output-****` バケットに翻訳結果が `yyyymmddhhmmss_Translate.txt` というキー名で出力されます。Slack の Incoming WebHook URL を指定している場合は、対象となっているチャンネルにも翻訳結果の文章が通知されます。  
+
+サンプルの MP3 ファイルは Amazon Polly のサンプル音源を使用しています。
+
+- [Amazon Polly](https://aws.amazon.com/polly/?nc1=h_ls)
 
 # リソースの削除
 
