@@ -10,20 +10,22 @@ export class JawsUgBgnr24HomeworkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    const stackConfig = JSON.parse(fs.readFileSync('stack-config.json', {encoding: 'utf-8'}));
+
     /**
      * S3 buckets
      */
-    const s3BucketNameSufix = 'replace-to-any-string' // S3 バケットを一意の名前にするためのサフィックス. 例) your-name
-    const s3Buckets: {[key: string]: string} = {
-      'TranscribeInput': `transcribe-input-${s3BucketNameSufix}`,
-      'TranscribeOutput': `transcribe-output-${s3BucketNameSufix}`,
-      'TranslateOutput': `translate-output-${s3BucketNameSufix}`,
-    };
+    const s3BucketNameSufix = stackConfig.s3_suffix;
+    const s3Buckets: {[key: string]: string}[] = [
+      {'resourceName': 'TranscribeInput', 'bucketName': `transcribe-input-${s3BucketNameSufix}`},
+      {'resourceName': 'TranscribeOutput', 'bucketName': `transcribe-output-${s3BucketNameSufix}`},
+      {'resourceName': 'TranslateOutput', 'bucketName': `translate-output-${s3BucketNameSufix}`},
+    ];
     const bucketObjects: {[key: string]: s3.Bucket} = {};
 
-    Object.keys(s3Buckets).forEach(bucketUsage => {
-      bucketObjects[bucketUsage] = new s3.Bucket(this, bucketUsage, {
-        bucketName: s3Buckets[bucketUsage],
+    s3Buckets.forEach(bucket => {
+      bucketObjects[bucket.resourceName] = new s3.Bucket(this, bucket.resourceName, {
+        bucketName: bucket.bucketName,
         removalPolicy: cdk.RemovalPolicy.DESTROY
       });
     });
@@ -57,7 +59,7 @@ export class JawsUgBgnr24HomeworkStack extends cdk.Stack {
     }));
 
     // 翻訳用の Lambda 関数
-    const slackWebHookUrl = 'https://*********' // 翻訳結果を Slack に通知する場合は WebHook URL を指定する
+    const slackWebHookUrl = stackConfig.slack_webhook_url;
     const transLateLambdaFn = new lambda.Function(this, 'Translate', {
       code: new lambda.InlineCode(
         fs.readFileSync('lambda/translate_from_transcribe.py', {encoding: 'utf-8'})

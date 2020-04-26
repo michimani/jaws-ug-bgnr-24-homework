@@ -62,20 +62,28 @@ JAWS-UG 初心者支部#24 サーバレスハンズオン勉強会 にて宿題�
     $ npm install
     ```
 
-4. ソースコードの変更
+4. config ファイルの作成
 
-    作成される S3 バケット名のサフィックスを編集します。(自分の名前など、一意になるような文字列を指定します)
-    編集対象は `lib/jaws-ug-bgnr-24-homework-stack.ts` の 16 行目 です。
+    `stack-config.json.sample` をコピーして `stack-config.json` を作成します。
     
-    ```typescript
-    const s3BucketNameSufix = 'replace-to-any-string'
+    ```bash
+    $ cp stack-config.json.sample stack-config.json
     ```
+ 
+    `stack-config.json` は下記のような内容になっています。
     
-    Slack への通知を行う場合は Incoming WebHook の URL を指定します。編集対象は  `lib/jaws-ug-bgnr-24-homework-stack.ts` の 60 行目 です。
-    
-    ```typescript
-    const slackWebHookUrl = 'https://*********'
+    ```json
+    {
+      "s3_suffix": "replace-to-any-string",
+      "slack_webhook_url": "https://*********"
+    }
     ```
+ 
+    - `s3_suffix`  
+      作成される S3 バケット名のサフィックスを編集します。(自分の名前や日付など、一意になるような文字列を指定します)
+    
+    - `slack_webhook_url`  
+      Slack への通知を行う場合は Incoming WebHook の URL を指定します。
   
 5. CloudFormation テンプレートの生成
 
