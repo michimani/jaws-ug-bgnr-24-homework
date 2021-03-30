@@ -40,7 +40,7 @@ JAWS-UG 初心者支部#24 サーバレスハンズオン勉強会 にて宿題�
     ```bash
     $ npm install -g aws-cdk
     $ cdk --version
-    1.33.1 (build 8ad4d34)
+    1.95.1 (build ed2bbe6)
     ```
 
 2. リポジトリを clone
